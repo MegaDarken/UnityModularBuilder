@@ -50,6 +50,9 @@ public class UserMovementScript : MonoBehaviour
 
         Vector3 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
 
+        //Rotate to match facing
+        desiredVelocity = gameObject.transform.rotation * desiredVelocity;
+
         //X axis
         if (velocity.x < desiredVelocity.x) {
 			velocity.x =
