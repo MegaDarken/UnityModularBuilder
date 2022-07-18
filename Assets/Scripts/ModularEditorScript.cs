@@ -25,6 +25,7 @@ public class ModularEditorScript : MonoBehaviour
     void Update()
     {
         
+
         //If Mouse is clicked
         MouseClick();
 
@@ -35,6 +36,9 @@ public class ModularEditorScript : MonoBehaviour
         //Left Mouse Button
         if (Input.GetButtonDown("Fire1"))
         {
+            //Deselect
+
+
             Vector3 mousePosition = Input.mousePosition;
 
             //If in selection Menu, pass to new shape selection 
@@ -81,6 +85,8 @@ public class ModularEditorScript : MonoBehaviour
     public void SelectObject(GameObject selected)
     {
         selectedObject = selected;
+
+
     }
 
     void SelectNewShape()
@@ -149,6 +155,50 @@ public class ModularEditorScript : MonoBehaviour
             Destroy(shape);
         }
         
+    }
+
+    //GUI
+    private void OnGUI()
+    {
+        //Creation Menu
+
+        //Edit Menu
+
+        //Toolpanel
+    }
+
+    private void CreationMenu()
+    {
+        //Background box
+
+        //New Shape button
+
+        //Delete Shape button 
+    }
+
+    private void EditMenu()
+    {
+        //if selection is not null
+
+        //Background box
+
+        //Position
+
+        //Rotation
+
+        //Scale 
+
+    }
+
+    private void CreationMenu()
+    {
+        //Background box
+
+        //Move tool
+
+        //Rotate tool
+
+        //Scale tool
     }
 
 }
