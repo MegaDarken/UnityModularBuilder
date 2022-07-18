@@ -5,6 +5,7 @@ using UnityEngine;
 public class ModularShapeScript : MonoBehaviour
 {
     //Vector of last mouse position
+    private Vector3 previousPosition;
     private Vector3 previousMousePosition;
     
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class ModularShapeScript : MonoBehaviour
     private void OnMouseDown()
     {
         //set previous position
+        previousPosition = gameObject.transform.position;
         previousMousePosition = MouseVector();
 
         //Select object
@@ -33,7 +35,7 @@ public class ModularShapeScript : MonoBehaviour
     {
         //find distance from previous position
         //Move selected object
-        gameObject.transform.position += (MouseVector() - previousMousePosition);
+        gameObject.transform.position = previousPosition + (MouseVector() - previousMousePosition);
 
     }
 
