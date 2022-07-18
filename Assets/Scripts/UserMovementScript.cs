@@ -5,18 +5,22 @@ using UnityEngine;
 public class UserMovementScript : MonoBehaviour
 {
     [SerializeField, Range(0f, 100f)]
-	float maxSpeed = 10f;
+	float maxSpeed = 5f;
 
     [SerializeField, Range(0f, 100f)]
-	float maxAcceleration = 10f;
+	float maxAcceleration = 1f;
+
+    [SerializeField, Range(0f, 100f)]
+	float mouseSensitivity = 5f;
 
     Vector3 velocity;
 
-    Rigidbody body;
+    float xMouse;
+    float yMouse;
 
 	void Awake ()
     {
-		body = GetComponent<Rigidbody>();
+		//Initalise 
 	}
 
     // Start is called before the first frame update
@@ -29,6 +33,9 @@ public class UserMovementScript : MonoBehaviour
     void Update()
     {
         UpdatePosition();
+
+        UpdateRotation();
+
     }
 
     private void UpdatePosition()
@@ -64,4 +71,17 @@ public class UserMovementScript : MonoBehaviour
 	    //transform.localPosition += (velocity * Time.deltaTime); 
         gameObject.transform.position += velocity;
     }
+
+    private void UpdateRotation()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            xMouse += Input.GetAxis("Mouse X") * mouseSensitivity;// * Time.deltaTime;
+            yMouse += Input.GetAxis("Mouse Y") * mouseSensitivity;// * Time.deltaTime;
+
+            gameObject.transform.rotation = (Quaternion.Euler(-yMouse, xMouse, 0));
+        }
+
+    }
+
 }
