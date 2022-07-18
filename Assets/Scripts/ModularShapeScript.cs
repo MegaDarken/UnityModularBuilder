@@ -66,7 +66,7 @@ public class ModularShapeScript : MonoBehaviour
         }
     }
 
-    void NewShape()
+    void NewShape(Transform prefab)
     {
         //Create shape
         Transform newShape = Instantiate(prefab);
