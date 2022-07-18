@@ -28,6 +28,12 @@ public class UserMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
+    {
+        //Max difference calculated beforehand
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
 
         Vector2 playerInput;
@@ -36,7 +42,6 @@ public class UserMovementScript : MonoBehaviour
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
         Vector3 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
-        Vector3 acceleration = new Vector3(playerInput.x, 0f, playerInput.y) * maxAcceleration;
 
         //X axis
         if (velocity.x < desiredVelocity.x) {
