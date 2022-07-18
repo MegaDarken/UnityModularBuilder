@@ -10,7 +10,7 @@ public class ModularEditorScript : MonoBehaviour
 
     List<Transform> menuShapes;
 
-    GameObject selectedObject;
+    private GameObject selectedObject;
 
     // Start is called before the first frame update
     void Start()
@@ -78,13 +78,9 @@ public class ModularEditorScript : MonoBehaviour
         //Pass to parent
     }
 
-    void SelectObject()
+    public void SelectObject(GameObject selected)
     {
-        //Using Mouse position
-
-        //Raycast to find what was clicked on
-
-        
+        selectedObject = selected;
     }
 
     void SelectNewShape()
