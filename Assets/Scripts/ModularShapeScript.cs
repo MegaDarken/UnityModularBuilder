@@ -52,8 +52,18 @@ public class ModularShapeScript : MonoBehaviour
     
     void SelectShape()
     {
-        //Pass reference for this object into ModularEditorScript
+        //Get Editor Object
+        GameObject editorObject =  GameObject.FindWithTag("ModularEditor");
 
+        //If there is an editor
+        if (editorObject != null)
+        {
+            //Get Script
+            editorObject.GetComponent<ModularEditorScript>().SelectObject(gameObject);
+
+            //Pass reference for this object into ModularEditorScript
+
+        }
     }
 
     void NewShape()
