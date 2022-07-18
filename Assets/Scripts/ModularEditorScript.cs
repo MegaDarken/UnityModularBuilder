@@ -6,6 +6,7 @@ public class ModularEditorScript : MonoBehaviour
 {
     //Editable modular objects
     GameObject[] modularObjects;
+    List<GameObject> menuShapes;
 
     GameObject selectedObject;
 
@@ -19,15 +20,16 @@ public class ModularEditorScript : MonoBehaviour
     void Update()
     {
         //Get up to date array of editable objects
-
+        modularObjects = GameObject.FindGameObjectsWithTag("ModularShape")
 
         //If Mouse is clicked
+        MouseClick();
 
-        
     }
 
     void MouseClick()
     {
+        //Left Mouse Button
         if (Input.GetButtonDown("Fire1"))
         {
             Vector3 mousePosition = Input.mousePosition;
@@ -41,6 +43,9 @@ public class ModularEditorScript : MonoBehaviour
 
             //Else select an object or nothing
         }
+
+        //Right Mouse Button
+
     }
 
     int MouseClickRegion(Vector3 mousePosition, Vector2 regionSize)
@@ -87,6 +92,8 @@ public class ModularEditorScript : MonoBehaviour
         //Get region mouse clicked
 
 
+        //Close Menu
+        CloseNewShapeGrid();
         
         //Add shape to object
 
@@ -95,20 +102,36 @@ public class ModularEditorScript : MonoBehaviour
     void ShapeOnCamera(GameObject prefab, Vector3 position)
     {
         //Create object
+        GameObject cameraShape = Instantiate(prefab);
 
         //Parent to camera
+        cameraShape.transform.SetParent(Camera.main.transform, false);
 
         //Apply transform to object
+        cameraShape.transform.localPosition = position;
+
+        //Add to list
+        menuShapes.Add(cameraShape);
     }
 
     void DisplayNewShapeGrid()
     {
 
-        //For Y axis
 
-        //For X axis
+        Vector3 position = Vector3.forward;
 
-        //At edge of screen, exit x loop
+        int xIndex, yIndex;
+        xIndex = yIndex = 0;
+
+        foreach(GameObject shape in modularObjects)
+        {
+            //for next shape
+
+            //Attach to camera
+            ShapeOnCamera(shape, position);
+        
+            xIndex++;//Increment X position
+        }
 
         //
 
@@ -117,10 +140,12 @@ public class ModularEditorScript : MonoBehaviour
     void CloseNewShapeGrid()
     {
         //For each shape in menu
-
-        //destroy shape
-
-
+        foreach (GameObject shape in menuShapes)
+        {
+            //destroy shape
+            Destroy(shape);
+        }
+        
     }
 
 }
