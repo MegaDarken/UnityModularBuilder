@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class ModularShapeScript : MonoBehaviour
 {
+    //Vector of last mouse position
+    private Vector3 previousMousePosition;
     
     // Start is called before the first frame update
     void Start()
     {
-        //Load in all the shapes if needed
+        
     }
 
     // Update is called once per frame
@@ -20,26 +22,38 @@ public class ModularShapeScript : MonoBehaviour
     //Select on Click
     private void OnMouseDown()
     {
-
+        //set previous position
+        previousMousePosition = MouseVector();
 
         //Select object
-
-        //Get modular editor
+        SelectShape();
     }
 
     private void OnMouseDrag()
     {
-        //
-
+        //find distance from previous position
         //Move selected object
+        gameObject.transform.position += (MouseVector() - previousMousePosition);
 
     }
 
     private Vector3 MouseVector()
     {
+        //Get dimention position
+        Vector3 mousePosition = Input.mousePosition;
 
+        //set Z to Clip Plane
+        mousePosition.z = Camera.main.nearClipPlane;
+
+        return Camera.main.ScreenToWorldPoint(mousePosition);
     }
     
+    void SelectShape()
+    {
+        //Pass reference for this object into ModularEditorScript
+
+    }
+
     void NewShape()
     {
         //Create shape
