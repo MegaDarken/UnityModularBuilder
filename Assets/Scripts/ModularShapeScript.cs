@@ -69,17 +69,17 @@ public class ModularShapeScript : MonoBehaviour
     void NewShape()
     {
         //Create shape
-
+        Transform newShape = Instantiate(prefab);
 
         //Set parent to root as this object
-
+        newShape.transform.SetParent(gameObject.transform, false);
 
     }
 
     void DeleteShape()
     {
         //Delete object
-
+        Destroy(gameObject);
 
     }
 
