@@ -5,23 +5,26 @@ using UnityEngine;
 public class ModularEditorScript : MonoBehaviour
 {
     //Editable modular objects
-    GameObject[] modularObjects;
-    List<GameObject> menuShapes;
+    [SerializeField]
+    Transform[] modularPrefabs;
+
+    List<Transform> menuShapes;
 
     GameObject selectedObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Initalise attributes
+        menuShapes = new List<Transform>();
+
+        //DisplayNewShapeGrid(4);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Get up to date array of editable objects
-        modularObjects = GameObject.FindGameObjectsWithTag("ModularShape")
-
+        
         //If Mouse is clicked
         MouseClick();
 
@@ -33,9 +36,6 @@ public class ModularEditorScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Vector3 mousePosition = Input.mousePosition;
-
-            Debug.Log(mousePosition.x);
-            Debug.Log(mousePosition.y);
 
             //If in selection Menu, pass to new shape selection 
 
@@ -99,10 +99,10 @@ public class ModularEditorScript : MonoBehaviour
 
     }
 
-    void ShapeOnCamera(GameObject prefab, Vector3 position)
+    void ShapeOnCamera(Transform prefab, Vector3 position)
     {
         //Create object
-        GameObject cameraShape = Instantiate(prefab);
+        Transform cameraShape = Instantiate(prefab);
 
         //Parent to camera
         cameraShape.transform.SetParent(Camera.main.transform, false);
@@ -114,7 +114,7 @@ public class ModularEditorScript : MonoBehaviour
         menuShapes.Add(cameraShape);
     }
 
-    void DisplayNewShapeGrid()
+    void DisplayNewShapeGrid(int gridWidth)
     {
 
 
@@ -123,14 +123,21 @@ public class ModularEditorScript : MonoBehaviour
         int xIndex, yIndex;
         xIndex = yIndex = 0;
 
-        foreach(GameObject shape in modularObjects)
+        foreach(Transform shape in modularPrefabs)
         {
             //for next shape
 
             //Attach to camera
-            ShapeOnCamera(shape, position);
+            ShapeOnCamera(shape, new Vector3(xIndex,yIndex,1f));
         
             xIndex++;//Increment X position
+
+            //If off the end of menu wrap to next row
+            if(xIndex > gridWidth)
+            {
+                xIndex = 0;
+                yIndex++;
+            }
         }
 
         //
@@ -140,7 +147,7 @@ public class ModularEditorScript : MonoBehaviour
     void CloseNewShapeGrid()
     {
         //For each shape in menu
-        foreach (GameObject shape in menuShapes)
+        foreach (Transform shape in menuShapes)
         {
             //destroy shape
             Destroy(shape);
