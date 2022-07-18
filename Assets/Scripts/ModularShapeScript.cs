@@ -44,8 +44,8 @@ public class ModularShapeScript : MonoBehaviour
         //Get dimention position
         Vector3 mousePosition = Input.mousePosition;
 
-        //set Z to Clip Plane
-        mousePosition.z = Camera.main.nearClipPlane;
+        //set Z to Distance between camera and object
+        mousePosition.z = Vector3.Distance(Camera.main.transform.position, previousPosition);
 
         return Camera.main.ScreenToWorldPoint(mousePosition);
     }
