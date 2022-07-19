@@ -25,7 +25,6 @@ public class ModularEditorScript : MonoBehaviour
 
         newShapeMenuIsOpen = false;
 
-        //DisplayNewShapeGrid(4);
     }
 
     // Update is called once per frame
@@ -57,6 +56,7 @@ public class ModularEditorScript : MonoBehaviour
             //Else if clicked button(s)
 
             //Else select an object or nothing
+
         }
 
         //Right Mouse Button
@@ -90,9 +90,6 @@ public class ModularEditorScript : MonoBehaviour
         //Get shape script
         shape.GetComponent<ModularShapeScript>().DeleteShape();
 
-        //Call delete
-        //selectedObject.DeleteShape();
-
         shape = null;//Object Deselect
 
     }
@@ -102,6 +99,11 @@ public class ModularEditorScript : MonoBehaviour
         selectedObject = selected;
 
 
+    }
+
+    public bool NewShapeMenuIsOpen()
+    {
+        return newShapeMenuIsOpen;
     }
 
     void SelectNewShape()
@@ -168,8 +170,7 @@ public class ModularEditorScript : MonoBehaviour
             }
         }
 
-        //
-
+        //Flag that the menu is open
         newShapeMenuIsOpen = true;
     }
 
@@ -261,10 +262,10 @@ public class ModularEditorScript : MonoBehaviour
             //Rotation
             GUI.Label(new Rect (xPosition + 5, yPosition + 60, width, 20), "Rotation" );
 
-            selectedObject.transform.localRotation = Quaternion.Euler(
-            float.Parse(GUI.TextField(new Rect (xPosition + 5, yPosition + 80, 30, 20), ("" + selectedObject.transform.localRotation.x) ) ),
-            float.Parse(GUI.TextField(new Rect (xPosition + 35, yPosition + 80, 30, 20), ("" + selectedObject.transform.localRotation.y) ) ),
-            float.Parse(GUI.TextField(new Rect (xPosition + 65, yPosition + 80, 30, 20), ("" + selectedObject.transform.localRotation.z) ) )
+            selectedObject.transform.localEulerAngles = new Vector3(
+            float.Parse(GUI.TextField(new Rect (xPosition + 5, yPosition + 80, 30, 20), ("" + selectedObject.transform.localEulerAngles.x) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 35, yPosition + 80, 30, 20), ("" + selectedObject.transform.localEulerAngles.y) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 65, yPosition + 80, 30, 20), ("" + selectedObject.transform.localEulerAngles.z) ) )
             );
 
             //Scale 
