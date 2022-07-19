@@ -32,6 +32,12 @@ public class UserMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //On ESC quit application
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
+
         UpdatePosition();
 
         UpdateRotation();
