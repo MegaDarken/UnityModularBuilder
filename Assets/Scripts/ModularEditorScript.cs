@@ -64,17 +64,6 @@ public class ModularEditorScript : MonoBehaviour
 
     }
 
-    private Vector3 MouseVector()
-    {
-        //Get dimention position
-        Vector3 mousePosition = Input.mousePosition;
-
-        //set Z to Distance between camera and object
-        mousePosition.z = 1f;//Distance to objects
-
-        return Camera.main.ScreenToWorldPoint(mousePosition);
-    }
-
     public void NewShape(GameObject chosenShape)
     {
         //Create shape
@@ -105,28 +94,6 @@ public class ModularEditorScript : MonoBehaviour
     public bool NewShapeMenuIsOpen()
     {
         return newShapeMenuIsOpen;
-    }
-
-    void SelectNewShape()
-    {
-        //Get region mouse clicked
-        Vector3 mousePosition = MouseVector();
-
-        Vector3 relitivePosition = Camera.main.transform.TransformPoint(mousePosition);
-
-        //
-        int selection = (int)(relitivePosition.x/gridSelectionSize);
-        selection += (int)(relitivePosition.y/gridSelectionSize)*gridWidth;
-
-        if (selection >= 0 && selection < modularPrefabs.Length)
-        {
-            NewShape(modularPrefabs[selection]);
-        }
-
-        //Close Menu
-        CloseNewShapeGrid();
-        
-
     }
 
     void ShapeOnCamera(GameObject prefab, Vector3 position, Vector3 scale)
