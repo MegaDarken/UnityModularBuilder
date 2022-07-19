@@ -6,6 +6,7 @@ public class ModularShapeScript : MonoBehaviour
 {
     //Vector of last mouse position
     private Vector3 previousPosition;
+
     private Vector3 previousMousePosition;
     
     ModularEditorScript editorScript;
@@ -40,7 +41,24 @@ public class ModularShapeScript : MonoBehaviour
     {
         //find distance from previous position
         //Move selected object
-        gameObject.transform.position = previousPosition + (MouseVector() - previousMousePosition);
+        switch (editorScript.CurrentTool())
+        {
+            case ModularEditorScript.MOVE_TOOL_VALUE:
+                gameObject.transform.position = previousPosition + (MouseVector() - previousMousePosition);
+                break;
+
+            case ModularEditorScript.ROTATE_TOOL_VALUE:
+                
+                break;
+
+            case ModularEditorScript.SCALE_TOOL_VALUE:
+                
+                break;
+
+            default:
+                Debug.Log("No tool selected.");
+                break;
+        }
 
     }
 
