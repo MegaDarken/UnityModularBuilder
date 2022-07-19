@@ -92,8 +92,6 @@ public class ModularEditorScript : MonoBehaviour
         //Get shape script
         shape.GetComponent<ModularShapeScript>().DeleteShape();
 
-        shape = null;//Object Deselect
-
     }
 
     public void SelectObject(GameObject selected)
