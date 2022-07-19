@@ -76,12 +76,14 @@ public class ModularEditorScript : MonoBehaviour
         //Create shape
         Transform newShape = Instantiate(chosenShape.transform);
 
-        //Set parent to root as this object
-        newShape.transform.SetParent(selectedObject.transform, false);
-
         //New shape is placed above selected one
         newShape.transform.localPosition = Vector3.up;
         newShape.transform.localScale = Vector3.one;//Normal scale
+
+        //Set parent to root as this object
+        newShape.transform.SetParent(selectedObject.transform, false);
+
+        
     }
 
     void DeleteShape(GameObject shape)
