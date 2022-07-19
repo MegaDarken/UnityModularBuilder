@@ -84,16 +84,16 @@ public class ModularEditorScript : MonoBehaviour
 
     }
 
-    void DeleteShape()
+    void DeleteShape(GameObject shape)
     {
 
         //Get shape script
-        selectedObject.GetComponent<ModularShapeScript>().DeleteShape();
+        shape.GetComponent<ModularShapeScript>().DeleteShape();
 
         //Call delete
         //selectedObject.DeleteShape();
 
-        selectedObject = null;//Object Deselect
+        shape = null;//Object Deselect
 
     }
 
@@ -180,9 +180,12 @@ public class ModularEditorScript : MonoBehaviour
         //For each shape in menu
         foreach (Transform shape in menuShapes)
         {
+            
             //destroy shape
-            Destroy(shape);
+            DeleteShape(shape.gameObject);
         }
+
+        menuShapes.Clear();
         
     }
 
@@ -211,15 +214,24 @@ public class ModularEditorScript : MonoBehaviour
         //New Shape button
         if ( GUI.Button(new Rect (xPosition, yPosition + 20, width, 20), "New" ) )
         {
-            //Open new shape menu
-            DisplayNewShapeGrid();
+            //Is the menu already open?
+            if ( newShapeMenuIsOpen )
+            {
+                //Close menu
+                CloseNewShapeGrid();
+            }
+            else
+            {
+                //Open new shape menu
+                DisplayNewShapeGrid();
+            }
         }
 
         //Delete Shape button 
         if ( GUI.Button(new Rect (xPosition, yPosition + 45, width, 20), "Delete" ) )
         {
             //Delete 
-            DeleteShape();
+            DeleteShape(selectedObject);
         }
 
     }
