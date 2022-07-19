@@ -68,18 +68,21 @@ public class ModularEditorScript : MonoBehaviour
 
     void NewShape(GameObject chosenShape)
     {
-        //If no object is selected generate new Modular Shape object
-        
-        //Set selected object to generated 
+        //Get shape script
 
+        //Pass through shape
+        //selectedObject.NewShape(chosenShape.transform);
 
     }
 
     void DeleteShape()
     {
-        //Get parent 
 
-        //Pass to parent
+        //Get shape script
+
+        //Call delete
+        //selectedObject.DeleteShape();
+
     }
 
     public void SelectObject(GameObject selected)
@@ -161,26 +164,40 @@ public class ModularEditorScript : MonoBehaviour
     private void OnGUI()
     {
         //Creation Menu
+        CreationMenu(5, 5);
 
         //Edit Menu
+        EditMenu(5, 200);
 
         //Toolpanel
+        ToolMenu(5, 400);
     }
 
-    private void CreationMenu()
+    private void CreationMenu(int xPosition, int yPosition)
     {
+        //Menu Dimentions
+        int width = 80;
+        int height = 100;
+
         //Background box
+        GUI.Box (new Rect (xPosition, yPosition, width, height), "Creation");
 
         //New Shape button
 
         //Delete Shape button 
+
     }
 
-    private void EditMenu()
+    private void EditMenu(int xPosition, int yPosition)
     {
+        //Menu Dimentions
+        int width = 80;
+        int height = 100;
+
         //if selection is not null
 
         //Background box
+        GUI.Box (new Rect (xPosition, yPosition, width, height), "Edit");
 
         //Position
 
@@ -190,15 +207,21 @@ public class ModularEditorScript : MonoBehaviour
 
     }
 
-    private void CreationMenu()
+    private void ToolMenu(int xPosition, int yPosition)
     {
+        //Menu Dimentions
+        int width = 80;
+        int height = 100;
+
         //Background box
+        GUI.Box (new Rect (xPosition, yPosition, width, height), "Tools");
 
         //Move tool
 
         //Rotate tool
 
         //Scale tool
+
     }
 
 }
