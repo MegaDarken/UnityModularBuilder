@@ -18,6 +18,11 @@ public class ModularEditorScript : MonoBehaviour
     private float gridSelectionSize = 0.2f;
     private Vector3 newShapeMenuPosition;
 
+    private byte currentTool = 0;
+    const public byte MOVE_TOOL_VALUE = 0;
+    const public byte ROTATE_TOOL_VALUE = 1;
+    const public byte SCALE_TOOL_VALUE = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -160,6 +165,11 @@ public class ModularEditorScript : MonoBehaviour
         newShapeMenuIsOpen = false;
     }
 
+    public int CurrentTool()
+    {
+        return currentTool;
+    }
+
     //GUI
     private void OnGUI()
     {
@@ -266,21 +276,21 @@ public class ModularEditorScript : MonoBehaviour
         if ( GUI.Button(new Rect (xPosition, yPosition + 20, width, 20), "Move" ) )
         {
             //Set Tool to move
-
+            currentTool = MOVE_TOOL_VALUE;
         }
 
         //Rotate tool
         if ( GUI.Button(new Rect (xPosition, yPosition + 45, width, 20), "Rotate" ) )
         {
             //Set Tool to rotate
-            
+            currentTool = ROTATE_TOOL_VALUE;
         }
 
         //Scale tool
         if ( GUI.Button(new Rect (xPosition, yPosition + 70, width, 20), "Scale" ) )
         {
             //Set Tool to scale
-            
+            currentTool = SCALE_TOOL_VALUE;
         }
 
     }
