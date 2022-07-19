@@ -6,17 +6,24 @@ public class ModularEditorScript : MonoBehaviour
 {
     //Editable modular objects
     [SerializeField]
-    Transform[] modularPrefabs;
+    GameObject[] modularPrefabs;
 
-    List<Transform> menuShapes;
+    List<GameObject> menuShapes;
 
     private GameObject selectedObject;
+
+    private bool newShapeMenuIsOpen; 
+
+    private int gridWidth = 4;
+    private float gridSelectionSize = 0.2f;
 
     // Start is called before the first frame update
     void Start()
     {
         //Initalise attributes
-        menuShapes = new List<Transform>();
+        menuShapes = new List<GameObject>();
+
+        newShapeMenuIsOpen = false;
 
         //DisplayNewShapeGrid(4);
     }
@@ -39,9 +46,13 @@ public class ModularEditorScript : MonoBehaviour
             //Deselect
 
 
-            Vector3 mousePosition = Input.mousePosition;
+            
 
-            //If in selection Menu, pass to new shape selection 
+            //If in selection Menu, pass to new shape selection
+            if (newShapeMenuIsOpen)
+            {
+                SelectNewShape();
+            }
 
             //Else if clicked button(s)
 
@@ -52,18 +63,15 @@ public class ModularEditorScript : MonoBehaviour
 
     }
 
-    int MouseClickRegion(Vector3 mousePosition, Vector2 regionSize)
+    private Vector3 MouseVector()
     {
-        //How wide is the screen?
+        //Get dimention position
+        Vector3 mousePosition = Input.mousePosition;
 
+        //set Z to Distance between camera and object
+        mousePosition.z = 1f;//Distance to objects
 
-        //Calculate for X
-
-
-        //Calculate for Y
-
-
-        return -1;//Failure
+        return Camera.main.ScreenToWorldPoint(mousePosition);
     }
 
     void NewShape(GameObject chosenShape)
@@ -99,45 +107,53 @@ public class ModularEditorScript : MonoBehaviour
     void SelectNewShape()
     {
         //Get region mouse clicked
+        Vector3 mousePosition = MouseVector();
 
+        Vector3 relitivePosition = Camera.main.transform.TransformPoint(mousePosition);
+
+        //
+        int selection = (int)(relitivePosition.x/gridSelectionSize);
+        selection += (int)(relitivePosition.y/gridSelectionSize)*gridWidth;
+
+        NewShape(menuShapes[selection]);
 
         //Close Menu
         CloseNewShapeGrid();
         
-        //Add shape to object
 
     }
 
-    void ShapeOnCamera(Transform prefab, Vector3 position)
+    void ShapeOnCamera(GameObject prefab, Vector3 position, Vector3 scale)
     {
         //Create object
-        Transform cameraShape = Instantiate(prefab);
+        GameObject cameraShape = Instantiate(prefab);
 
         //Parent to camera
         cameraShape.transform.SetParent(Camera.main.transform, false);
 
         //Apply transform to object
         cameraShape.transform.localPosition = position;
+        cameraShape.transform.localScale = scale;
 
         //Add to list
         menuShapes.Add(cameraShape);
     }
 
-    void DisplayNewShapeGrid(int gridWidth)
+    void DisplayNewShapeGrid()
     {
-
+        newShapeMenuIsOpen = true;
 
         Vector3 position = Vector3.forward;
 
         int xIndex, yIndex;
         xIndex = yIndex = 0;
 
-        foreach(Transform shape in modularPrefabs)
+        foreach(GameObject shape in modularPrefabs)
         {
             //for next shape
 
             //Attach to camera
-            ShapeOnCamera(shape, new Vector3(xIndex,yIndex,1f));
+            ShapeOnCamera(shape, new Vector3(xIndex * gridSelectionSize,yIndex * gridSelectionSize, 1f), new Vector3(0.1f, 0.1f, 0.1f));
         
             xIndex++;//Increment X position
 
@@ -156,7 +172,7 @@ public class ModularEditorScript : MonoBehaviour
     void CloseNewShapeGrid()
     {
         //For each shape in menu
-        foreach (Transform shape in menuShapes)
+        foreach (GameObject shape in menuShapes)
         {
             //destroy shape
             Destroy(shape);
@@ -190,7 +206,7 @@ public class ModularEditorScript : MonoBehaviour
         if ( GUI.Button(new Rect (xPosition, yPosition + 20, width, 20), "New" ) )
         {
             //Open new shape menu
-            DisplayNewShapeGrid(4);
+            DisplayNewShapeGrid();
         }
 
         //Delete Shape button 
