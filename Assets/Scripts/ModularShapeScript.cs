@@ -6,6 +6,8 @@ public class ModularShapeScript : MonoBehaviour
 {
     //Vector of last mouse position
     private Vector3 previousPosition;
+    private Vector3 previousRotation;
+    private Vector3 previousScale;
 
     private Vector3 previousMousePosition;
     
@@ -31,6 +33,9 @@ public class ModularShapeScript : MonoBehaviour
     {
         //set previous position
         previousPosition = gameObject.transform.position;
+        previousRotation = gameObject.transform.eulerAngles;
+        previousScale = gameObject.transform.localScale;
+
         previousMousePosition = MouseVector();
 
         //Select object
@@ -48,11 +53,11 @@ public class ModularShapeScript : MonoBehaviour
                 break;
 
             case ModularEditorScript.ROTATE_TOOL_VALUE:
-                
+                gameObject.transform.eulerAngles = previousRotation + (MouseVector() - previousMousePosition);
                 break;
 
             case ModularEditorScript.SCALE_TOOL_VALUE:
-                
+                gameObject.transform.localScale = previousScale + (MouseVector() - previousMousePosition);
                 break;
 
             default:
