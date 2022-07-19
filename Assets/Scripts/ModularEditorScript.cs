@@ -19,9 +19,9 @@ public class ModularEditorScript : MonoBehaviour
     private Vector3 newShapeMenuPosition;
 
     private byte currentTool = 0;
-    const public byte MOVE_TOOL_VALUE = 0;
-    const public byte ROTATE_TOOL_VALUE = 1;
-    const public byte SCALE_TOOL_VALUE = 2;
+    public const byte MOVE_TOOL_VALUE = 0;
+    public const byte ROTATE_TOOL_VALUE = 1;
+    public const byte SCALE_TOOL_VALUE = 2;
 
     // Start is called before the first frame update
     void Start()
