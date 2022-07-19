@@ -58,12 +58,19 @@ public class ModularShapeScript : MonoBehaviour
         ModularEditorScript editorScript;
 
         //If there is an editor and new shape menu is not open
-        if (( editorScript = editorObject.GetComponent<ModularEditorScript>()) != null && !editorScript.NewShapeMenuIsOpen())
+        if (( editorScript = editorObject.GetComponent<ModularEditorScript>()) != null )
         {
             
-            //Get Script
-            editorScript.SelectObject(gameObject);//Pass reference for this object into ModularEditorScript
-
+            if (!editorScript.NewShapeMenuIsOpen())
+            {
+                //Get Script
+                editorScript.SelectObject(gameObject);//Pass reference for this object into ModularEditorScript
+            }
+            else if (editorScript.NewShapeMenuIsOpen())
+            {
+                //Create new instance of object clicked
+                editorScript.NewShape(gameObject);
+            }
             
         }
     }
