@@ -69,6 +69,7 @@ public class ModularEditorScript : MonoBehaviour
     void NewShape(GameObject chosenShape)
     {
         //Get shape script
+        selectedObject.GetComponent<ModularShapeScript>().NewShape(chosenShape.transform);
 
         //Pass through shape
         //selectedObject.NewShape(chosenShape.transform);
@@ -79,9 +80,12 @@ public class ModularEditorScript : MonoBehaviour
     {
 
         //Get shape script
+        selectedObject.GetComponent<ModularShapeScript>().DeleteShape();
 
         //Call delete
         //selectedObject.DeleteShape();
+
+        selectedObject = null;//Object Deselect
 
     }
 
