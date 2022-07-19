@@ -74,6 +74,9 @@ public class ModularEditorScript : MonoBehaviour
         //Set parent to root as this object
         newShape.transform.SetParent(selectedObject.transform, false);
 
+        //New shape is placed above selected one
+        newShape.transform.localPosition = Vector3.up;
+        newShape.transform.localScale = Vector3.one;//Normal scale
     }
 
     void DeleteShape(GameObject shape)
