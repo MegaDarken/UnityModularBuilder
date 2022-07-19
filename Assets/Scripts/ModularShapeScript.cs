@@ -8,10 +8,15 @@ public class ModularShapeScript : MonoBehaviour
     private Vector3 previousPosition;
     private Vector3 previousMousePosition;
     
+    ModularEditorScript editorScript;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Get Editor Object
+        GameObject editorObject = GameObject.FindWithTag("ModularEditor");
+
+        editorScript = editorObject.GetComponent<ModularEditorScript>();
     }
 
     // Update is called once per frame
@@ -52,13 +57,9 @@ public class ModularShapeScript : MonoBehaviour
     
     void SelectShape()
     {
-        //Get Editor Object
-        GameObject editorObject = GameObject.FindWithTag("ModularEditor");
-
-        ModularEditorScript editorScript;
-
+        
         //If there is an editor and new shape menu is not open
-        if (( editorScript = editorObject.GetComponent<ModularEditorScript>()) != null )
+        if ( editorScript != null )
         {
             
             if (!editorScript.NewShapeMenuIsOpen())
