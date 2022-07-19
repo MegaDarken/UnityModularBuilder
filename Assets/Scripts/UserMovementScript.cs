@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UserMovementScript : MonoBehaviour
 {
-    [SerializeField, Range(0f, 100f)]
-	float maxSpeed = 5f;
+    [SerializeField, Range(0f, 10f)]
+	float maxSpeed = 1f;
 
-    [SerializeField, Range(0f, 100f)]
+    [SerializeField, Range(0f, 10f)]
 	float maxAcceleration = 1f;
 
-    [SerializeField, Range(0f, 100f)]
-	float mouseSensitivity = 5f;
+    [SerializeField, Range(0f, 10f)]
+	float mouseSensitivity = 3f;
 
     Vector3 velocity;
 
