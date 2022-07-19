@@ -202,19 +202,25 @@ public class ModularEditorScript : MonoBehaviour
     {
         //Menu Dimentions
         int width = 80;
-        int height = 100;
+        int height = 120;
 
-        //if selection is not null
+        //if an object is selected
+        if ( selectedObject != null )
+        {
 
-        //Background box
-        GUI.Box (new Rect (xPosition, yPosition, width, height), "Edit");
+            //Background box
+            GUI.Box (new Rect (xPosition, yPosition, width, height), "Edit");
 
-        //Position
+            //Position
+            GUI.Label(new Rect (xPosition + 5, yPosition + 20, width, 20), "Position" ); 
 
-        //Rotation
+            //Rotation
+            GUI.Label(new Rect (xPosition + 5, yPosition + 50, width, 20), "Rotation" );
 
-        //Scale 
+            //Scale 
+            GUI.Label(new Rect (xPosition + 5, yPosition + 80, width, 20), "Scale" );
 
+        }
     }
 
     private void ToolMenu(int xPosition, int yPosition)
