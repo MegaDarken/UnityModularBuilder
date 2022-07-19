@@ -201,8 +201,8 @@ public class ModularEditorScript : MonoBehaviour
     private void EditMenu(int xPosition, int yPosition)
     {
         //Menu Dimentions
-        int width = 80;
-        int height = 120;
+        int width = 100;
+        int height = 145;
 
         //if an object is selected
         if ( selectedObject != null )
@@ -212,13 +212,31 @@ public class ModularEditorScript : MonoBehaviour
             GUI.Box (new Rect (xPosition, yPosition, width, height), "Edit");
 
             //Position
-            GUI.Label(new Rect (xPosition + 5, yPosition + 20, width, 20), "Position" ); 
+            GUI.Label(new Rect (xPosition + 5, yPosition + 20, width, 20), "Position" );
+
+            selectedObject.transform.localPosition = new Vector3(
+            float.Parse(GUI.TextField(new Rect (xPosition + 5, yPosition + 40, 30, 20), ("" + selectedObject.transform.localPosition.x) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 35, yPosition + 40, 30, 20), ("" + selectedObject.transform.localPosition.y) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 65, yPosition + 40, 30, 20), ("" + selectedObject.transform.localPosition.z) ) )
+            );
 
             //Rotation
-            GUI.Label(new Rect (xPosition + 5, yPosition + 50, width, 20), "Rotation" );
+            GUI.Label(new Rect (xPosition + 5, yPosition + 60, width, 20), "Rotation" );
+
+            selectedObject.transform.localRotation = Quaternion.Euler(
+            float.Parse(GUI.TextField(new Rect (xPosition + 5, yPosition + 80, 30, 20), ("" + selectedObject.transform.localRotation.x) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 35, yPosition + 80, 30, 20), ("" + selectedObject.transform.localRotation.y) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 65, yPosition + 80, 30, 20), ("" + selectedObject.transform.localRotation.z) ) )
+            );
 
             //Scale 
-            GUI.Label(new Rect (xPosition + 5, yPosition + 80, width, 20), "Scale" );
+            GUI.Label(new Rect (xPosition + 5, yPosition + 100, width, 20), "Scale" );
+
+            selectedObject.transform.localScale = new Vector3(
+            float.Parse(GUI.TextField(new Rect (xPosition + 5, yPosition + 120, 30, 20), ("" + selectedObject.transform.localScale.x) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 35, yPosition + 120, 30, 20), ("" + selectedObject.transform.localScale.y) ) ),
+            float.Parse(GUI.TextField(new Rect (xPosition + 65, yPosition + 120, 30, 20), ("" + selectedObject.transform.localScale.z) ) )
+            );
 
         }
     }
