@@ -227,10 +227,25 @@ public class ModularEditorScript : MonoBehaviour
         GUI.Box (new Rect (xPosition, yPosition, width, height), "Tools");
 
         //Move tool
+        if ( GUI.Button(new Rect (xPosition, yPosition + 20, width, 20), "Move" ) )
+        {
+            //Set Tool to move
+
+        }
 
         //Rotate tool
+        if ( GUI.Button(new Rect (xPosition, yPosition + 45, width, 20), "Rotate" ) )
+        {
+            //Set Tool to rotate
+            
+        }
 
         //Scale tool
+        if ( GUI.Button(new Rect (xPosition, yPosition + 70, width, 20), "Scale" ) )
+        {
+            //Set Tool to scale
+            
+        }
 
     }
 
