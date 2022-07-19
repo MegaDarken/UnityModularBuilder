@@ -8,7 +8,7 @@ public class ModularEditorScript : MonoBehaviour
     [SerializeField]
     GameObject[] modularPrefabs;
 
-    List<GameObject> menuShapes;
+    List<Transform> menuShapes;
 
     private GameObject selectedObject;
 
@@ -21,7 +21,7 @@ public class ModularEditorScript : MonoBehaviour
     void Start()
     {
         //Initalise attributes
-        menuShapes = new List<GameObject>();
+        menuShapes = new List<Transform>();
 
         newShapeMenuIsOpen = false;
 
@@ -49,7 +49,7 @@ public class ModularEditorScript : MonoBehaviour
             
 
             //If in selection Menu, pass to new shape selection
-            if (newShapeMenuIsOpen)
+            if (newShapeMenuIsOpen)//And within space?
             {
                 SelectNewShape();
             }
@@ -115,7 +115,10 @@ public class ModularEditorScript : MonoBehaviour
         int selection = (int)(relitivePosition.x/gridSelectionSize);
         selection += (int)(relitivePosition.y/gridSelectionSize)*gridWidth;
 
-        NewShape(menuShapes[selection]);
+        if (selection >= 0 && selection < modularPrefabs.Length)
+        {
+            NewShape(modularPrefabs[selection]);
+        }
 
         //Close Menu
         CloseNewShapeGrid();
@@ -126,7 +129,7 @@ public class ModularEditorScript : MonoBehaviour
     void ShapeOnCamera(GameObject prefab, Vector3 position, Vector3 scale)
     {
         //Create object
-        GameObject cameraShape = Instantiate(prefab);
+        Transform cameraShape = Instantiate(prefab.transform);
 
         //Parent to camera
         cameraShape.transform.SetParent(Camera.main.transform, false);
@@ -141,7 +144,7 @@ public class ModularEditorScript : MonoBehaviour
 
     void DisplayNewShapeGrid()
     {
-        newShapeMenuIsOpen = true;
+        
 
         Vector3 position = Vector3.forward;
 
@@ -167,12 +170,15 @@ public class ModularEditorScript : MonoBehaviour
 
         //
 
+        newShapeMenuIsOpen = true;
     }
 
     void CloseNewShapeGrid()
     {
+        newShapeMenuIsOpen = false;
+
         //For each shape in menu
-        foreach (GameObject shape in menuShapes)
+        foreach (Transform shape in menuShapes)
         {
             //destroy shape
             Destroy(shape);
