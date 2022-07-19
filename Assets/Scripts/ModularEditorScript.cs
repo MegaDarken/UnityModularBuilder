@@ -50,7 +50,8 @@ public class ModularEditorScript : MonoBehaviour
             //If in selection Menu, pass to new shape selection
             if (newShapeMenuIsOpen)//And within space?
             {
-                SelectNewShape();
+                //SelectNewShape();
+                CloseNewShapeGrid();
             }
 
             //Else if clicked button(s)
@@ -74,13 +75,13 @@ public class ModularEditorScript : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePosition);
     }
 
-    void NewShape(GameObject chosenShape)
+    public void NewShape(GameObject chosenShape)
     {
-        //Get shape script
-        selectedObject.GetComponent<ModularShapeScript>().NewShape(chosenShape.transform);
+        //Create shape
+        Transform newShape = Instantiate(chosenShape.transform);
 
-        //Pass through shape
-        //selectedObject.NewShape(chosenShape.transform);
+        //Set parent to root as this object
+        newShape.transform.SetParent(selectedObject.transform, false);
 
     }
 
@@ -176,7 +177,6 @@ public class ModularEditorScript : MonoBehaviour
 
     void CloseNewShapeGrid()
     {
-        newShapeMenuIsOpen = false;
 
         //For each shape in menu
         foreach (Transform shape in menuShapes)
@@ -188,6 +188,7 @@ public class ModularEditorScript : MonoBehaviour
 
         menuShapes.Clear();
         
+        newShapeMenuIsOpen = false;
     }
 
     //GUI
