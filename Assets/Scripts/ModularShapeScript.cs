@@ -55,14 +55,16 @@ public class ModularShapeScript : MonoBehaviour
         //Get Editor Object
         GameObject editorObject = GameObject.FindWithTag("ModularEditor");
 
-        //If there is an editor
-        if (editorObject != null)
+        ModularEditorScript editorScript;
+
+        //If there is an editor and new shape menu is not open
+        if (( editorScript = editorObject.GetComponent<ModularEditorScript>()) != null && !editorScript.NewShapeMenuIsOpen())
         {
+            
             //Get Script
-            editorObject.GetComponent<ModularEditorScript>().SelectObject(gameObject);
+            editorScript.SelectObject(gameObject);//Pass reference for this object into ModularEditorScript
 
-            //Pass reference for this object into ModularEditorScript
-
+            
         }
     }
 
