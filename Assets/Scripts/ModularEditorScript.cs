@@ -16,6 +16,7 @@ public class ModularEditorScript : MonoBehaviour
 
     private int gridWidth = 4;
     private float gridSelectionSize = 0.2f;
+    private Vector3 newShapeMenuPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class ModularEditorScript : MonoBehaviour
 
         newShapeMenuIsOpen = false;
 
+        newShapeMenuPosition = new Vector3(0.3f, 0.3f, 1f);
     }
 
     // Update is called once per frame
@@ -114,9 +116,6 @@ public class ModularEditorScript : MonoBehaviour
 
     void DisplayNewShapeGrid()
     {
-        
-
-        Vector3 position = Vector3.forward;
 
         int xIndex, yIndex;
         xIndex = yIndex = 0;
@@ -126,12 +125,12 @@ public class ModularEditorScript : MonoBehaviour
             //for next shape
 
             //Attach to camera
-            ShapeOnCamera(shape, new Vector3(xIndex * gridSelectionSize,yIndex * gridSelectionSize, 1f), new Vector3(0.1f, 0.1f, 0.1f));
+            ShapeOnCamera(shape, newShapeMenuPosition + new Vector3(xIndex * gridSelectionSize,-yIndex * gridSelectionSize, 0f), new Vector3(0.1f, 0.1f, 0.1f));
         
             xIndex++;//Increment X position
 
             //If off the end of menu wrap to next row
-            if(xIndex > gridWidth)
+            if(xIndex >= gridWidth)
             {
                 xIndex = 0;
                 yIndex++;
@@ -169,6 +168,9 @@ public class ModularEditorScript : MonoBehaviour
 
         //Toolpanel
         ToolMenu(5, 400);
+
+        //New Shape Menu Title
+        NewShapeMenu();
     }
 
     private void CreationMenu(int xPosition, int yPosition)
@@ -278,6 +280,22 @@ public class ModularEditorScript : MonoBehaviour
             
         }
 
+    }
+
+    private void NewShapeMenu()
+    {
+        //Only show if menu is open 
+        if (NewShapeMenuIsOpen())
+        {
+            //Title Displayed Shapes
+            int xPosition = (int)(Screen.width * 0.5f) + 100;
+            int yPosition = 5;
+
+            int width = 400;
+            int height = 30;
+
+            GUI.Box (new Rect (xPosition, yPosition, width, height), "New Shapes (You can clone existing shapes in the scene.)");
+        }
     }
 
 }
