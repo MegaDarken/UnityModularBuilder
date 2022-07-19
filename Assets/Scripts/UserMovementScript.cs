@@ -51,7 +51,7 @@ public class UserMovementScript : MonoBehaviour
         Vector3 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
 
         //Rotate to match facing
-        desiredVelocity = gameObject.transform.rotation * desiredVelocity;
+        desiredVelocity = gameObject.transform.localRotation * desiredVelocity;
 
         //X axis
         if (velocity.x < desiredVelocity.x) {
@@ -82,7 +82,7 @@ public class UserMovementScript : MonoBehaviour
             xMouse += Input.GetAxis("Mouse X") * mouseSensitivity;// * Time.deltaTime;
             yMouse += Input.GetAxis("Mouse Y") * mouseSensitivity;// * Time.deltaTime;
 
-            gameObject.transform.rotation = (Quaternion.Euler(-yMouse, xMouse, 0));
+            gameObject.transform.localRotation = (Quaternion.Euler(-yMouse, xMouse, 0));
         }
 
     }
