@@ -76,15 +76,6 @@ public class ModularShapeScript : MonoBehaviour
         }
     }
 
-    public void NewShape(Transform prefab)
-    {
-        //Create shape
-        Transform newShape = Instantiate(prefab);
-
-        //Set parent to root as this object
-        newShape.transform.SetParent(gameObject.transform, false);
-
-    }
 
     public void DeleteShape()
     {
