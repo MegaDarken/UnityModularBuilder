@@ -177,14 +177,24 @@ public class ModularEditorScript : MonoBehaviour
     {
         //Menu Dimentions
         int width = 80;
-        int height = 100;
+        int height = 70;
 
         //Background box
         GUI.Box (new Rect (xPosition, yPosition, width, height), "Creation");
 
         //New Shape button
+        if ( GUI.Button(new Rect (xPosition, yPosition + 20, width, 20), "New" ) )
+        {
+            //Open new shape menu
+            DisplayNewShapeGrid(4);
+        }
 
         //Delete Shape button 
+        if ( GUI.Button(new Rect (xPosition, yPosition + 45, width, 20), "Delete" ) )
+        {
+            //Delete 
+            DeleteShape();
+        }
 
     }
 
