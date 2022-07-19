@@ -53,7 +53,7 @@ public class ModularShapeScript : MonoBehaviour
     void SelectShape()
     {
         //Get Editor Object
-        GameObject editorObject =  GameObject.FindWithTag("ModularEditor");
+        GameObject editorObject = GameObject.FindWithTag("ModularEditor");
 
         //If there is an editor
         if (editorObject != null)
@@ -66,7 +66,7 @@ public class ModularShapeScript : MonoBehaviour
         }
     }
 
-    void NewShape(Transform prefab)
+    public void NewShape(Transform prefab)
     {
         //Create shape
         Transform newShape = Instantiate(prefab);
@@ -76,7 +76,7 @@ public class ModularShapeScript : MonoBehaviour
 
     }
 
-    void DeleteShape()
+    public void DeleteShape()
     {
         //Delete object
         Destroy(gameObject);
